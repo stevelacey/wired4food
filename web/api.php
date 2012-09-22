@@ -1,7 +1,7 @@
 <?php
 
-$sustaination = json_decode(file_get_contents('http://wired4food.air.stevelacey.net/businesses.json'));
-$bristolpound = json_decode(file_get_contents('http://wired4food.air.stevelacey.net/bristolpound.json'));
+$sustaination = json_decode(file_get_contents('businesses.json'));
+$bristolpound = json_decode(file_get_contents('bristolpound.json'));
 
 $data = array();
 
