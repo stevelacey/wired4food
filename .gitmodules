@@ -1,0 +1,3 @@
+[submodule "web/js/lib/gmaps"]
+	path = web/js/lib/gmaps
+	url = git://github.com/HPNeo/gmaps.git

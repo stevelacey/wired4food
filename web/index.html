@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+  <title>Map</title>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <div id="map">
+    <!-- kapow!-->
+  </div>
+
+  <script id="infowindow-template" type="text/x-handlebars-template">
+    <div class="infowindow vcard">
+      <h2 class="fn org">
+        {{# if url }}
+          <a href="{{ url }}" class="url">{{ name }}</a>
+        {{ else }}
+          {{ name }}
+        {{/ if }}
+      </h2>
+
+      {{# if twitter }}
+        {{# if url }}
+          <a href="{{ url }}" class="image" title="{{ name }}">
+            <img src="http://images.twitter.stevelacey.net/{{ twitter }}/bigger" alt="{{ name }}" />
+          </a>
+        {{ else }}
+          <img src="http://images.twitter.stevelacey.net/{{ twitter }}/bigger" class="image" alt="{{ name }}" />
+        {{/ if }}
+      {{/ if }}
+
+      <p class="adr">
+        {{# if location.address }}
+          <span class="street-address">{{ location.address }}</span><br />
+        {{/ if }}
+        {{# if location.city }}
+          <span class="locality">{{ location.city }}</span><br />
+        {{/ if }}
+        {{# if location.postalCode }}
+          <span class="postal-code">{{ location.postalCode }}</span>
+        {{/ if }}
+      </p>
+
+      {{# if telephone }}
+        <p class="tel">{{ telephone }}</p>
+      {{/ if }}
+
+      {{# if twitter }}
+        <a href="http://www.twitter.com/{{ twitter }}" class="twitter" title="Twitter: @{{ twitter }}">
+          @{{ twitter }}
+        </a>
+      {{/ if }}
+
+      <p>
+        {{# if visits }}
+          Visited {{ visits }} times!
+        {{/ if }}
+      </p>
+    </div>
+  </script>
+
+  <script src="js/lib/jquery.min.js"></script>
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+  <script src="js/lib/gmaps/gmaps.js"></script>
+  <script src="js/lib/handlebars.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
