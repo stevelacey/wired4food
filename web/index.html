@@ -19,43 +19,43 @@
         {{/ if }}
       </h2>
 
-      {{# if twitter }}
-        {{# if url }}
-          <a href="{{ url }}" class="image" title="{{ name }}">
-            <img src="http://images.twitter.stevelacey.net/{{ twitter }}/bigger" alt="{{ name }}" />
-          </a>
-        {{ else }}
-          <img src="http://images.twitter.stevelacey.net/{{ twitter }}/bigger" class="image" alt="{{ name }}" />
-        {{/ if }}
+      {{# if description }}
+        <p>{{ description }}</p>
       {{/ if }}
 
-      <p class="adr">
-        {{# if location.address }}
-          <span class="street-address">{{ location.address }}</span><br />
-        {{/ if }}
-        {{# if location.city }}
-          <span class="locality">{{ location.city }}</span><br />
-        {{/ if }}
-        {{# if location.postalCode }}
-          <span class="postal-code">{{ location.postalCode }}</span>
-        {{/ if }}
-      </p>
-
-      {{# if telephone }}
-        <p class="tel">{{ telephone }}</p>
+      {{# if address }}
+        {{# with address }}
+          <p class="adr">
+            {{# if line_1 }}
+              <span class="street-address">{{ line_1 }}</span><br />
+            {{/ if }}
+            {{# if line_2 }}
+              <span class="street-address">{{ line_2 }}</span><br />
+            {{/ if }}
+            {{# if city }}
+              <span class="locality">{{ city }}</span><br />
+            {{/ if }}
+            {{# if county }}
+              <span class="locality">{{ county }}</span><br />
+            {{/ if }}
+            {{# if postcode }}
+              <span class="postal-code">{{ postcode }}</span>
+            {{/ if }}
+          </p>
+        {{/ with }}
       {{/ if }}
 
-      {{# if twitter }}
-        <a href="http://www.twitter.com/{{ twitter }}" class="twitter" title="Twitter: @{{ twitter }}">
-          @{{ twitter }}
-        </a>
+      {{# if categories }}
+        <ul>
+          {{# each categories }}
+            <li>{{ name }}</li>
+          {{/ each }}
+        </ul>
       {{/ if }}
 
-      <p>
-        {{# if visits }}
-          Visited {{ visits }} times!
-        {{/ if }}
-      </p>
+      {{# if distance }}
+        <p class="distance">{{ distance }}</p>
+      {{/ if }}
     </div>
   </script>
 
