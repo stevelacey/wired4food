@@ -1,6 +1,24 @@
 <?php
 
-$sustaination = json_decode(file_get_contents('businesses.json'));
+$cache = __DIR__ . '/../cache/'.md5(serialize($_GET));
+
+if (!file_exists($cache) || filemtime($cache) < strtotime('yesterday')) {
+  $sustaination = file_get_contents(sprintf('http://app.sustaination.co/businesses.api?%s', http_build_query($_GET)));
+
+  if (!is_dir(dirname($cache))) {
+    mkdir(dirname($cache), 0755, true);
+  }
+
+  $file = fopen($cache, 'w');
+  fwrite($file, $sustaination);
+  fclose($file);
+} else {
+  $file = fopen($cache, 'r');
+  $sustaination = fread($file, filesize($cache));
+  fclose($file);
+}
+
+$sustaination = json_decode($sustaination);
 $bristolpound = json_decode(file_get_contents('bristolpound.json'));
 
 $data = array();
