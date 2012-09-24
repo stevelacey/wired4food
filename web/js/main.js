@@ -7,7 +7,7 @@ var map = new GMaps({
 var template = Handlebars.compile($('#infowindow-template').html());
 
 $.ajax({
-  url: 'api.php',
+  url: 'api.php?location=Bristol, UK',
   dataType: 'json',
   success: function(data) {
     var c, e, i, latlngs = [];
@@ -74,7 +74,7 @@ $.ajax({
       }
     }
 
-    map.fitBounds(latlngs);
+    // map.fitBounds(latlngs);
   }
 });
 
