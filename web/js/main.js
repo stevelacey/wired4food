@@ -10,7 +10,7 @@ $.ajax({
   url: 'api.php',
   dataType: 'json',
   success: function(data) {
-    var c, e, i;
+    var c, e, i, latlngs = [];
     var excludes = ['bar', 'cafe', 'child', 'club', 'collectors', 'convenience', 'council', 'fast food', 'fish & chip', 'hotel', 'newsagents', 'pub', 'public house', 'restaurant', 'supermarket', 'take away', 'takeaway', 'universities'];
 
     for (i=0; i < data.length; i++) {
@@ -57,6 +57,12 @@ $.ajax({
         }
       });
 
+      latlngs.push(
+        new google.maps.LatLng(
+          supplier.location.latitude, supplier.location.longitude
+        )
+      );
+
       if (supplier.icon) {
         marker.setIcon(new google.maps.MarkerImage(
           '/images/' + supplier.icon + '.png',
@@ -67,6 +73,8 @@ $.ajax({
         ));
       }
     }
+
+    map.fitBounds(latlngs);
   }
 });
 
