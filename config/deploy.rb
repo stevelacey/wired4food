@@ -3,6 +3,8 @@
 set :application, "wired4food"
 set :repository, "git://github.com/stevelacey/#{application}.git"
 
+set :shared_children, %w(cache)
+
 # Environment
 
 set :domain, "stevelacey.net"
@@ -37,4 +39,3 @@ ssh_options[:forward_agent] = true
 # Remote Cache
 
 set :deploy_via, :remote_cache
-set :repository_cache, "cache"
