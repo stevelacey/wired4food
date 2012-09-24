@@ -27,6 +27,7 @@ foreach ($bristolpound as $business) {
   $data[$business->name] = $business;
 }
 
+$bristol = false;
 $bristolpound = $data;
 
 $data = array();
@@ -42,6 +43,8 @@ foreach ($sustaination->data as $business) {
   );
 
   if (array_key_exists($business->name, $bristolpound)) {
+    $bristol = true;
+
     $business->bristolpound = 'http://bristolpound.org' . $bristolpound[$business->name]->url;
 
     unset($bristolpound[$business->name]);
@@ -50,28 +53,30 @@ foreach ($sustaination->data as $business) {
   $data[$business->name] = $business;
 }
 
-foreach ($bristolpound as $business) {
-  $object = (object) array(
-    'name' => $business->name,
-    'address' => new stdClass,
-    'bristolpound' => 'http://bristolpound.org' . $business->url,
-  );
+if ($bristol) {
+  foreach ($bristolpound as $business) {
+    $object = (object) array(
+      'name' => $business->name,
+      'address' => new stdClass,
+      'bristolpound' => 'http://bristolpound.org' . $business->url,
+    );
 
-  $address = explode(', ', $business->address);
+    $address = explode(', ', $business->address);
 
-  $object->location = (object) array(
-    'latitude' => $business->latitude,
-    'longitude' => $business->longitude
-  );
+    $object->location = (object) array(
+      'latitude' => $business->latitude,
+      'longitude' => $business->longitude
+    );
 
-  $object->address->postcode = array_pop($address);
+    $object->address->postcode = array_pop($address);
 
-  if ($address) { $object->address->line_1 = array_shift($address); }
-  if ($address) { $object->address->line_2 = array_shift($address); }
-  if ($address) { $object->address->city = array_shift($address); }
-  if ($address) { $object->address->county = array_shift($address); }
+    if ($address) { $object->address->line_1 = array_shift($address); }
+    if ($address) { $object->address->line_2 = array_shift($address); }
+    if ($address) { $object->address->city = array_shift($address); }
+    if ($address) { $object->address->county = array_shift($address); }
 
-  $data[$business->name] = $object;
+    $data[$business->name] = $object;
+  }
 }
 
 echo json_encode(array_values($data));
